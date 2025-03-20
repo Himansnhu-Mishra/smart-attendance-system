@@ -278,8 +278,14 @@ def mark_attendance(name):
     except Exception as e:
         print(f"Error processing attendance for {name}: {e}")
 
+import os
+
 if __name__ == '__main__':
     # Ensure the uploads directory exists
     if not os.path.exists("uploads"):
         os.makedirs("uploads")
-    app.run(debug=True) 
+
+    # Use the environment variable PORT for deployment
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+    
